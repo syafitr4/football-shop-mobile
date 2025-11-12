@@ -39,7 +39,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Add Product Form')),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
       ),
       drawer: LeftDrawer(),
@@ -169,7 +169,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                      backgroundColor: MaterialStateProperty.all(Colors.redAccent),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
