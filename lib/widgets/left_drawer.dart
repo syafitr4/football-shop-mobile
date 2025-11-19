@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football_shop/screens/menu.dart';
 import 'package:football_shop/screens/shoplist_form.dart';
+import 'package:football_shop/screens/product_entry_list.dart';
+
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -27,7 +29,6 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text("tokonya footballer jago!",
-                    // TODO: Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
@@ -38,7 +39,6 @@ class LeftDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // TODO: Bagian routing
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
@@ -57,7 +57,6 @@ class LeftDrawer extends StatelessWidget {
             // Bagian redirection ke ProductFormPage
             onTap: () {
               /*
-              TODO: Buatlah routing ke ProductFormPage di sini,
               setelah halaman ProductFormPage sudah dibuat.
 
               */
@@ -68,6 +67,19 @@ class LeftDrawer extends StatelessWidget {
         ));
             },
           ),
+          ListTile(
+    leading: const Icon(Icons.add_reaction_rounded),
+    title: const Text('News List'),
+    onTap: () {
+        // Route to news list page
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ProductFormPage()),
+        );
+    },
+),
+
+
         ],
       ),
     );

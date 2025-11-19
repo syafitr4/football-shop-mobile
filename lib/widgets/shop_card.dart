@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:football_shop/screens/menu.dart';
 import 'package:football_shop/screens/shoplist_form.dart';
+import 'package:football_shop/screens/product_entry_list.dart'; // 1. Import halaman list product
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
 
   const ItemCard(this.item, {super.key});
 
-  // Mapping nama -> warna (case-insensitive + beberapa sinonim)
+  // Mapping nama -> warna
   Color _bgFor(String name) {
     switch (name.toLowerCase()) {
-      case 'all product':
+      case 'lihat daftar produk': // Sesuaikan dengan nama item di menu.dart
+      case 'daftar produk':
+      case 'all product': // Tambahkan variasi nama
         return Colors.blue;
-      case 'my product':
-        return Colors.green;
       case 'create product':
+      case 'tambah produk':
+        return Colors.green;
+      case 'logout':
         return Colors.red;
       default:
         return Theme.of(_ctx!).colorScheme.secondary; // fallback
@@ -25,7 +29,7 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _ctx = context; // simpan context sementara untuk fallback theme
+    _ctx = context; // simpan context sementara
     final bg = _bgFor(item.name);
     const onBg = Colors.white;
 
@@ -35,21 +39,34 @@ class ItemCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
+          // Tampilkan SnackBar
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!")),
             );
-          // Arahkan untuk Create/Add Product
+
           final n = item.name.toLowerCase();
-          if (n == 'add product' || n == 'create product') {
-            Navigator.pushReplacement(
+
+          // Navigasi ke Form Tambah Produk
+          if (n == 'tambah produk' || n == 'create product' || n == 'add product') {
+            Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductFormPage(),
+                builder: (context) => const ProductFormPage(),
+              ),
+            );
+          } 
+          // 2. Navigasi ke Daftar Produk (GET)
+          else if (n == 'lihat daftar produk' || n == 'daftar produk' || n == 'all product') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductEntryListPage(),
               ),
             );
           }
+          // Tambahkan kondisi Logout jika perlu
         },
         child: Container(
           padding: const EdgeInsets.all(8),
